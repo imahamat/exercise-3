@@ -76,30 +76,30 @@ jobs:
             aws cloudformation deploy \
               --template-file template.yml \
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
-              --region us-west-2
+              --region us-east-1
       # Fail the job intentionally to simulate an error.
       # Uncomment the line below if you want to fail the current step
       # - run: return 1
-      # - destroy_environment
+      - destroy_environment
 
 
   # Exercise: Config and Deployment
-   configure_infrastructure: 
-     docker:
-       - image: python:3.7-alpine3.11
-     steps:
-       - checkout
-       - add_ssh_keys:
-           fingerprints: ["af:ab:ff:90:9e:23:61:e6:a7:e9:30:1a:2f:92:fe:88"] # You can get this ID in the section where you registered the SSH Key
-       - run:
-           name: Install dependencies
-           command: |
-             # install the dependencies needed for your playbook
-             apk add --update ansible 
-       - run:
-           name: Configure server
-           command: |
-             ansible-playbook -i inventory.txt main4.yml
+  configure_infrastructure: 
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["af:ab:ff:90:9e:23:61:e6:a7:e9:30:1a:2f:92:fe:88"] # You can get this ID in the section where you registered the SSH Key
+      - run:
+          name: Install dependencies
+          command: |
+            # install the dependencies needed for your playbook
+            apk add --update ansible 
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt main4.yml
 
   # Exercise: Smoke Testing
   # smoke_test:
@@ -214,7 +214,7 @@ workflows:
   my_workflow:
     # Run the welcome/run job in its own container
     jobs:
-      #- welcome/run
+      # - welcome/run
       - print_greetings
       # - upload_file
       # - download_file:
