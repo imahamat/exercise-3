@@ -1,1 +1,1 @@
-# exercise-3
+# Exercise: Infrastructure Creation
