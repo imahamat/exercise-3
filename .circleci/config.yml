@@ -215,7 +215,7 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       #- welcome/run
-      #- print_greetings
+      - print_greetings
       # - upload_file
       # - download_file:
       #     requires:
