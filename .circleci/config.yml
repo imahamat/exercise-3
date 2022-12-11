@@ -220,16 +220,16 @@ workflows:
         #  requires:
        #     - upload_file
       #- create_infrastructure
-      - smoke_test
+      #- smoke_test
       #- configure_infrastructure
-      #- create_and_deploy_front_end
-      #- promote_to_production:
-        #  requires: 
-       #     - create_and_deploy_front_end
-      #- get_last_deployment_id
-      #- clean_up_old_front_end:
-       #   requires:
-        #    - get_last_deployment_id
-         #   - promote_to_production
+      - create_and_deploy_front_end
+      - promote_to_production:
+          requires: 
+            - create_and_deploy_front_end
+      - get_last_deployment_id
+      - clean_up_old_front_end:
+          requires:
+            - get_last_deployment_id
+            - promote_to_production
 
 # VS Code Extension Version: 1.4.0
